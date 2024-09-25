@@ -4,5 +4,42 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group__input {
+  font: inherit;
+  color: #000;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  outline: 2px solid #fff;
+  background-color: transparent;
+  transition: outline-color 500ms;
+  width: 100%;
+  /* display: inline-block; */
+}
+.input-group__input:is(:focus, :valid) {
+  outline-color: #3c50eb;
+}
+.input-group__input:focus + .input-group__label,
+.input-group__input:valid + .input-group__label {
+  padding-inline: 5px;
+  translate: 10px -14px;
+  /* transform: translate(10px, -14px) scale(0.8); */
+  scale: 0.8;
+  background-color: #fff;
+}
+.input-group__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  translate: 10px 10px;
+  /* transform: translate(10px, 10px); */
+  color: #000;
+  transition: translate 500ms, scale 500ms;
 }

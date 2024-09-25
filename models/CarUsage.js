@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const CarUsage = sequelize.define(
-    "CarUsage",
+  const CarsUsage = sequelize.define(
+    "CarsUsage",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -70,17 +70,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     { timestamps: true, tableName: "cars-usage", paranoid: true }
   );
-  CarUsage.associate = (models) => {
-    CarUsage.belongsTo(models.Driver, {
+  CarsUsage.associate = (models) => {
+    CarsUsage.belongsTo(models.Driver, {
       foreignKey: "driver_id",
       as: "drivers",
     });
   };
-  CarUsage.associate = (models) => {
-    CarUsage.belongsTo(models.Car, {
+  CarsUsage.associate = (models) => {
+    CarsUsage.belongsTo(models.Car, {
       foreignKey: "car_id",
       as: "cars",
     });
   };
-  return CarUsage;
+  return CarsUsage;
 };

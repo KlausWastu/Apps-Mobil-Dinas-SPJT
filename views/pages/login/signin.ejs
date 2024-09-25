@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <title> <%= title %> </title> -->
+    <title>Sign In</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="/adminlte/plugins/fontawesome-free/css/all.min.css"
+    />
+    <!-- icheck bootstrap -->
+    <link
+      rel="stylesheet"
+      href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css" />
+
+    <!-- Css Mandiri -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <!-- /.login-logo -->
+      <div class="card card-outline card-primary">
+        <%- include ../../partials/message.ejs %>
+        <div class="card-header text-center">
+          <h2>Mobil Dinas SPJT</h2>
+        </div>
+        <div class="card-body">
+          <form action="/sign-in" method="post">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="input-group__input"
+                required
+              /><label for="email" class="input-group__label"
+                >Email Addres</label
+              >
+            </div>
+            <div class="input-group mb-3">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="input-group__input"
+                required
+              /><label for="password" class="input-group__label"
+                >Password</label
+              >
+            </div>
+            <div class="row">
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Sign In
+                </button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery -->
+    <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/adminlte/dist/js/adminlte.min.js"></script>
+  </body>
+</html>

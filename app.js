@@ -7,8 +7,9 @@ const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const session = require("express-session");
 
-var indexRouter = require("./routes/index");
+// var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const signInRouter = require("./routes/signin");
 const dashboardRouter = require("./routes/dashboard");
 const driverRouter = require("./routes/driver");
 
@@ -38,7 +39,7 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/admin-lte"))
 );
 
-app.use("/", indexRouter);
+app.use("/sign-in", signInRouter);
 app.use("/users", usersRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/drivers", driverRouter);

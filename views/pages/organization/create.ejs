@@ -1,0 +1,77 @@
+<%- include ../../partials/header.ejs %> <%- include ../../partials/navbar.ejs
+%> <%- include ../../partials/sidebar.ejs %>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Organisasi</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="/organizations">Organisasi</a>
+            </li>
+            <li class="breadcrumb-item active">Tambah</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Form Tambah Organisasi</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/organizations/create" method="POST">
+              <div class="card-body">
+                <div class="form-group">
+                  <label style="color: red">*</label
+                  ><label for="code">Kode</label>
+                  <input
+                    type="text"
+                    name="code"
+                    class="form-control"
+                    id="code"
+                    placeholder="Masukan pengkodean organisasi"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label style="color: red">*</label
+                  ><label for="name">Nama</label>
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    id="name"
+                    placeholder="Masukan nama departemen/divisi"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<%- include ../../partials/footer.ejs %> <%- include ../../partials/js.ejs %>

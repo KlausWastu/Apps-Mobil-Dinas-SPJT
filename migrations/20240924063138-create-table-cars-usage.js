@@ -40,6 +40,14 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      km_last: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      km_trip: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       tol_rates: {
         type: Sequelize.BIGINT,
         allowNull: true,

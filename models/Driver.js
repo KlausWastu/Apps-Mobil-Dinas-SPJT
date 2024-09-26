@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     { tableName: "drivers", paranoid: true, timestamps: true }
   );
   Driver.associate = (models) => {
-    Driver.hasMany(models.CarsUsage, {
+    Driver.hasMany(models.CarUsage, {
       foreignKey: "driver_id",
       as: "drivers",
     });

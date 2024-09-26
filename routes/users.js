@@ -1,9 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const {
+  index,
+  viewCreate,
+  actionCreate,
+  viewEdit,
+  actionEdit,
+  actionDelete,
+} = require("./handler/user/controller");
+const { isLogin } = require("./middleware/auth");
+
+router.use(isLogin);
+router.get("/", index);
+router.get("/create", viewCreate);
+router.post("/create", actionCreate);
+router.get("/edit/:id", viewEdit);
+router.put("/edit/:id", actionEdit);
+router.delete("/delete/:id", actionDelete);
 
 module.exports = router;

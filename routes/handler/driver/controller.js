@@ -19,6 +19,8 @@ module.exports = {
         alert,
         title: judul,
         drivers,
+        name: req.session.user.name,
+        role: req.session.user.role,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -30,6 +32,8 @@ module.exports = {
     try {
       res.render("pages/driver/create", {
         title: judul,
+        name: req.session.user.name,
+        role: req.session.user.role,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -60,6 +64,8 @@ module.exports = {
       res.render("pages/driver/edit", {
         title: judul,
         driver,
+        name: req.session.user.name,
+        role: req.session.user.role,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);

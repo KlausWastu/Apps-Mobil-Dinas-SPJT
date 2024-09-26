@@ -19,6 +19,8 @@ module.exports = {
         title: judul,
         alert,
         cars,
+        name: req.session.user.name,
+        role: req.session.user.role,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -30,6 +32,8 @@ module.exports = {
     try {
       res.render("pages/car/create", {
         title: judul,
+        name: req.session.user.name,
+        role: req.session.user.role,
       });
     } catch (error) {
       req.flash("alertMessage", `${err.message}`);
@@ -63,6 +67,8 @@ module.exports = {
       res.render("pages/car/edit", {
         title: judul,
         car,
+        name: req.session.user.name,
+        role: req.session.user.role,
       });
     } catch (error) {
       req.flash("alertMessage", `${err.message}`);

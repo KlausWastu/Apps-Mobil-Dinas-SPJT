@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
-      number_palte: {
+      number_plate: {
         type: DataTypes.STRING,
         allowNull: false,
       },

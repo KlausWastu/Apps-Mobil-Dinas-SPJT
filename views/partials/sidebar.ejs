@@ -22,6 +22,14 @@
       >
         <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
+        <% if(role === "user") {%>
+        <li class="nav-item">
+          <a href="/cars-usage" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>Penggunaan Mobil</p>
+          </a>
+        </li>
+        <% } else {%>
         <li class="nav-item">
           <a href="/dashboard" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
@@ -66,6 +74,7 @@
             <p>Logs</p>
           </a>
         </li>
+        <% } %>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

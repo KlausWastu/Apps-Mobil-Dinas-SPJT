@@ -43,8 +43,7 @@ module.exports = {
             if (check.role === "superadmin") {
               res.redirect("/dashboard");
             } else {
-              res.redirect("/sign-in");
-              // Ini masih perlu diperbaiki
+              res.redirect("/cars-usage");
             }
           } else {
             req.flash("alertMessage", `Kata Sandi yang anda masukan salah`);

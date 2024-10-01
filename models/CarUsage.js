@@ -81,13 +81,11 @@ module.exports = (sequelize, DataTypes) => {
   CarUsage.associate = (models) => {
     CarUsage.belongsTo(models.Driver, {
       foreignKey: "driver_id",
-      as: "drivers",
+      as: "driver",
     });
-  };
-  CarUsage.associate = (models) => {
     CarUsage.belongsTo(models.Car, {
       foreignKey: "car_id",
-      as: "cars",
+      as: "car",
     });
   };
   return CarUsage;

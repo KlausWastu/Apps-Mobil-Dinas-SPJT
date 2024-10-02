@@ -9,14 +9,14 @@ const {
   actionEdit,
   actionDelete,
 } = require("./handler/organization/controller");
-const { isLogin } = require("./middleware/auth");
+const { isLogin, isAdmin } = require("./middleware/auth");
 
 router.use(isLogin);
-router.get("/", index);
-router.get("/create", viewCreate);
-router.post("/create", actionCreate);
-router.get("/edit/:id", viewEdit);
-router.put("/edit/:id", actionEdit);
-router.delete("/delete/:id", actionDelete);
+router.get("/", isAdmin, index);
+router.get("/create", isAdmin, viewCreate);
+router.post("/create", isAdmin, actionCreate);
+router.get("/edit/:id", isAdmin, viewEdit);
+router.put("/edit/:id", isAdmin, actionEdit);
+router.delete("/delete/:id", isAdmin, actionDelete);
 
 module.exports = router;

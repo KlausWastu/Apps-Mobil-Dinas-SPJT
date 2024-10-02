@@ -16,7 +16,7 @@ module.exports = {
       } else if (req.session.user.role === "superadmin") {
         res.redirect("/dashboard");
       } else {
-        res.redirect("/sign-in");
+        res.redirect("/cars-usage");
       }
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);

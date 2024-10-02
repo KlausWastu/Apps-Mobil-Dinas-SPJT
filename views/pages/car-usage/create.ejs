@@ -1,0 +1,281 @@
+<%- include ../../partials/header.ejs %> <%- include ../../partials/navbar.ejs
+%> <%- include ../../partials/sidebar.ejs %>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Penggunaan Mobil</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="/cars-usage">Penggunaan Mobil</a>
+            </li>
+            <li class="breadcrumb-item active">Tambah</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Form Tambah Penggunaan Mobil</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/cars-usage/create" method="POST">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label
+                      ><label for="driver_id">Driver</label>
+                      <select
+                        id="driver_id"
+                        class="form-control select2"
+                        style="width: 100%"
+                        name="driver_id"
+                      >
+                        <option selected="selected">Pilih Driver</option>
+                        <% drivers.forEach(driver=> { %>
+                        <option value="<%= driver.id %>">
+                          <%= driver.name %>
+                        </option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="car_id">Mobil</label>
+                      <select
+                        id="car_id"
+                        class="form-control select2"
+                        style="width: 100%"
+                        name="car_id"
+                      >
+                        <option selected="selected">Pilih Mobil Dinas</option>
+                        <% cars.forEach(car=> { %>
+                        <option value="<%= car.id %>">
+                          <%= car.number_plate %>
+                        </option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-3">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="date_departure">Tanggal Berangkat</label>
+                      <!-- Date and time -->
+                      <div
+                        class="input-group date"
+                        id="reservationdatetime"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          type="text"
+                          class="form-control datetimepicker-input"
+                          data-target="#reservationdatetime"
+                          name="date_departure"
+                        />
+                        <div
+                          class="input-group-append"
+                          data-target="#reservationdatetime"
+                          data-toggle="datetimepicker"
+                        >
+                          <div class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-3">
+                    <div class="form-group">
+                      <label for="date_back">Tanggal Pulang</label>
+                      <div
+                        class="input-group date"
+                        id="reservationdatetime2"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          type="text"
+                          class="form-control datetimepicker-input"
+                          data-target="#reservationdatetime2"
+                          name="date_back"
+                        />
+                        <div
+                          class="input-group-append"
+                          data-target="#reservationdatetime2"
+                          data-toggle="datetimepicker"
+                        >
+                          <div class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="location_destination"
+                        >Lokasi yang Dituju</label
+                      >
+                      <input
+                        type="text"
+                        name="location_destination"
+                        class="form-control"
+                        id="location_destination"
+                        placeholder="Masukan lokasi yang dituju"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="passenger">Nama-Nama Penumpang</label>
+                      <input
+                        type="text"
+                        name="passenger"
+                        class="form-control"
+                        id="passenger"
+                        placeholder="Masukan nama penumpang"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="user_organization">Departemen Pengguna</label>
+                      <select
+                        id="user_organization"
+                        class="form-control select2"
+                        multiple="multiple"
+                        style="width: 100%"
+                        name="user_organization"
+                        data-placeholder="Pilih Departemen/Divisi Pengguna"
+                      >
+                        <% organizations.forEach(organisasi=> { %>
+                        <option value="<%= organisasi.id %>">
+                          <%= organisasi.code %> - <%= organisasi.name %>
+                        </option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="km_last">KM Akhir</label>
+                      <input
+                        type="text"
+                        name="km_last"
+                        class="form-control"
+                        id="km_last"
+                        placeholder="Masukan km akhir"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="km_trip">KM Trip</label>
+                      <input
+                        type="number"
+                        name="km_trip"
+                        class="form-control"
+                        id="km_trip"
+                        placeholder="Masukan km trip"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <div class="form-group">
+                      <label for="name">Tarif Tol</label>
+                      <input
+                        type="number"
+                        name="tol_rates"
+                        class="form-control"
+                        id="tol_rates"
+                        placeholder="Masukan tarif tol"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group">
+                      <label for="name">Tarif Parkir</label>
+                      <input
+                        type="number"
+                        name="parking_rates"
+                        class="form-control"
+                        id="parking_rates"
+                        placeholder="Masukan tarif parkir"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group">
+                      <label for="name">Tarif Bensin</label>
+                      <input
+                        type="number"
+                        name="fuel_rates"
+                        class="form-control"
+                        id="fuel_rates"
+                        placeholder="Masukan tarif bensin"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <label for="name">Keterangan</label>
+                      <input
+                        type="text"
+                        name="note"
+                        class="form-control"
+                        id="note"
+                        placeholder="Masukan keterangan"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<%- include ../../partials/footer.ejs %> <%- include ../../partials/js.ejs %>

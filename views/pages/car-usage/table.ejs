@@ -1,0 +1,50 @@
+<div class="card-body">
+  <table id="example2" class="table table-bordered table-hover text-center">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Driver</th>
+        <th>Mobil Operasional</th>
+        <th>Tanggal & Waktu Berangkat</th>
+        <th>Tanggal & Waktu Kembali</th>
+        <th>Lokasi yang Dituju</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i=0; i < carsUsage.length; i++) {%>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= carsUsage[i].driver.name %></td>
+        <td><%= carsUsage[i].car.number_plate %></td>
+        <td><%= carsUsage[i].date_departure %></td>
+        <td><%= carsUsage[i].date_back %></td>
+        <td><%= carsUsage[i].location_destination %></td>
+        <td class="d-flex justify-content-center">
+          <a
+            href="/cars-usage/detail/<%= carsUsage[i].id %>"
+            class="btn btn-primary btn-sm mr-2"
+          >
+            <i class="fas fa-info mr-2"> </i>Detail
+          </a>
+          <a
+            href="/cars-usage/edit/<%= carsUsage[i].id %>"
+            class="btn btn-warning btn-sm mr-2"
+          >
+            <i class="fas fa-pencil-alt mr-2"> </i>Edit
+          </a>
+          <form
+            action="/cars-usage/delete/<%= carsUsage[i].id %>?_method=DELETE"
+            style="display: inline-block"
+            method="POST"
+          >
+            <button class="btn btn-danger btn-sm">
+              <i class="fas fa-trash mr-2"></i>Hapus
+            </button>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

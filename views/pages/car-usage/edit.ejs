@@ -1,0 +1,342 @@
+<%- include ../../partials/header.ejs %> <%- include ../../partials/navbar.ejs
+%> <%- include ../../partials/sidebar.ejs %>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Penggunaan Mobil</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="/cars-usage">Penggunaan Mobil</a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Form Edit Penggunaan Mobil</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form
+              action="/cars-usage/edit/<%= carsUsage.id %>?_method=PUT"
+              method="POST"
+            >
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label
+                      ><label for="driver_id">Driver</label>
+                      <select
+                        id="driver_id"
+                        class="form-control select2"
+                        style="width: 100%"
+                        name="driver_id"
+                      >
+                        <% drivers.forEach(driver=> { %> <% if(driver.id ===
+                        carsUsage.driver_id) {%>
+                        <option value="<%= driver.id %>" selected>
+                          <%= driver.name %>
+                        </option>
+                        <% } else {%>
+                        <option value="<%= driver.id %>">
+                          <%= driver.name %>
+                        </option>
+                        <% } %> <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="car_id">Mobil</label>
+                      <select
+                        id="car_id"
+                        class="form-control select2"
+                        style="width: 100%"
+                        name="car_id"
+                      >
+                        <% cars.forEach(car=> { %> <% if(car.id ===
+                        carsUsage.car_id) {%>
+                        <option value="<%= car.id %>" selected>
+                          <%= car.number_plate %>
+                        </option>
+                        <% } else {%>
+                        <option value="<%= car.id %>">
+                          <%= car.number_plate %>
+                        </option>
+                        <% } %> <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-3">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="date_departure">Tanggal Berangkat</label>
+                      <!-- Date and time -->
+                      <div
+                        class="input-group date"
+                        id="reservationdatetime"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          type="text"
+                          class="form-control datetimepicker-input"
+                          data-target="#reservationdatetime"
+                          name="date_departure"
+                          value="<%= carsUsage.date_departure %>"
+                        />
+                        <div
+                          class="input-group-append"
+                          data-target="#reservationdatetime"
+                          data-toggle="datetimepicker"
+                        >
+                          <div class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-3">
+                    <div class="form-group">
+                      <label for="date_back">Tanggal Pulang</label>
+                      <div
+                        class="input-group date"
+                        id="reservationdatetime2"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          type="text"
+                          class="form-control datetimepicker-input"
+                          data-target="#reservationdatetime2"
+                          name="date_back"
+                          value="<%= carsUsage.date_back %>"
+                        />
+                        <div
+                          class="input-group-append"
+                          data-target="#reservationdatetime2"
+                          data-toggle="datetimepicker"
+                        >
+                          <div class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="location_destination"
+                        >Lokasi yang Dituju</label
+                      >
+                      <input
+                        type="text"
+                        name="location_destination"
+                        class="form-control"
+                        id="location_destination"
+                        placeholder="Masukan lokasi yang dituju"
+                        value="<%= carsUsage.location_destination %>"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="passenger">Nama-Nama Penumpang</label>
+                      <input
+                        type="text"
+                        name="passenger"
+                        class="form-control"
+                        id="passenger"
+                        placeholder="Masukan nama penumpang"
+                        value="<%= carsUsage.passenger %>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="user_organization">Departemen Pengguna</label>
+                      <select
+                        id="user_organization"
+                        class="form-control select2"
+                        multiple="multiple"
+                        style="width: 100%"
+                        name="user_organization"
+                        data-placeholder="Pilih Departemen/Divisi Pengguna"
+                        >
+                        <% 
+                        organizations.forEach(organisasi => { 
+                            let isSelected = false;
+                            if (Array.isArray(userOrganizationParsed)){
+                                isSelected = userOrganizationParsed.includes(organisasi.id.toString()) 
+                            } else if(typeof userOrganizationParsed === "number" ){
+                                isSelected = userOrganizationParsed === organisasi.id;
+                            }
+                        %>
+                            <option value="<%= organisasi.id %>" <%= isSelected ? 'selected' : '' %>>
+                                <%= organisasi.code %> - <%= organisasi.name %>
+                            </option>    
+                        <% }) %>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="km_last">KM Akhir</label>
+                      <input
+                        type="text"
+                        name="km_last"
+                        class="form-control"
+                        id="km_last"
+                        placeholder="Masukan km akhir"
+                        value="<%= carsUsage.km_last %>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="km_trip">KM Trip</label>
+                      <input
+                        type="number"
+                        name="km_trip"
+                        class="form-control"
+                        id="km_trip"
+                        placeholder="Masukan km trip"
+                        value="<%= carsUsage.km_trip %>"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <div class="form-group">
+                      <label for="name">Tarif Tol</label>
+                      <% if(carsUsage.tol_rates === null) {%>
+                      <input
+                        type="number"
+                        name="tol_rates"
+                        class="form-control"
+                        id="tol_rates"
+                        placeholder="Masukan tarif tol"
+                      />
+                      <% } else {%>
+                      <input
+                        type="number"
+                        name="tol_rates"
+                        class="form-control"
+                        id="tol_rates"
+                        value="<%= carsUsage.tol_rates %>"
+                      />
+                      <% } %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group">
+                      <label for="name">Tarif Parkir</label>
+                      <% if(carsUsage.parking_rates === null) {%>
+                      <input
+                        type="number"
+                        name="parking_rates"
+                        class="form-control"
+                        id="parking_rates"
+                        placeholder="Masukan tarif parkir"
+                      />
+                      <% } else {%>
+                      <input
+                        type="number"
+                        name="parking_rates"
+                        class="form-control"
+                        id="parking_rates"
+                        value="<%= carsUsage.parking_rates %>"
+                      />
+                      <% } %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group">
+                      <label for="name">Tarif Bensin</label>
+                      <% if(carsUsage.fuel_rates === null) {%>
+                      <input
+                        type="number"
+                        name="fuel_rates"
+                        class="form-control"
+                        id="fuel_rates"
+                        placeholder="Masukan tarif bensin"
+                      />
+                      <% } else {%>
+                      <input
+                        type="number"
+                        name="fuel_rates"
+                        class="form-control"
+                        id="fuel_rates"
+                        value="<%= carsUsage.fuel_rates %>"
+                      />
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <label for="name">Keterangan</label>
+                      <% if(carsUsage.note === null) {%>
+                      <input
+                        type="text"
+                        name="note"
+                        class="form-control"
+                        id="note"
+                        placeholder="Masukan keterangan"
+                      />
+                      <% } else {%>
+                        <input
+                        type="text"
+                        name="note"
+                        class="form-control"
+                        id="note"
+                        value="<%= carsUsage.note %>"
+                      />
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<%- include ../../partials/footer.ejs %> <%- include ../../partials/js.ejs %>

@@ -1,10 +1,10 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00b7ff;
+.select2-container .select2-selection--single {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  height: 35px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .input-group {
@@ -42,4 +42,12 @@ a {
   /* transform: translate(10px, 10px); */
   color: #000;
   transition: translate 500ms, scale 500ms;
+}
+
+.select2-selection__choice {
+  background-color: #007bff !important; /* Warna latar belakang biru */
+  color: white !important; /* Warna teks putih */
+  border-color: #006fe6 !important; /* Warna border biru */
+  padding: 0px 10px 0px 10px;
+  border-radius: 3px;
 }

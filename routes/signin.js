@@ -5,6 +5,5 @@ const { viewSignIn, actionSignIn } = require("./handler/signin/controller");
 
 router.get("/", viewSignIn);
 router.post("/", actionSignIn);
-// router.get("/create", viewCreate);
 
 module.exports = router;

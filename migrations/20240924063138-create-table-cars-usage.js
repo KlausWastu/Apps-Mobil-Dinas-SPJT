@@ -36,6 +36,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      needs: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
       user_organization: {
         type: Sequelize.TEXT,
         allowNull: true,
@@ -54,6 +58,10 @@ module.exports = {
       },
       parking_rates: {
         type: Sequelize.BIGINT,
+        allowNull: true,
+      },
+      photos: {
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       fuel_rates: {

@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      needs: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       location_destination: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -57,6 +61,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       note: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      photos: {
         type: DataTypes.TEXT,
         allowNull: true,
       },

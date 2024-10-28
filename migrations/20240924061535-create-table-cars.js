@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
       },
-      number_palte: {
+      number_plate: {
         type: Sequelize.STRING,
         allowNull: false,
       },

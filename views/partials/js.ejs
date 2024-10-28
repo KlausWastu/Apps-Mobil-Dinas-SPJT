@@ -28,6 +28,8 @@
 <script src="/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.js"></script>
+<!-- bs-custom-file-input -->
+<script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- Bootstrap Switch -->
 <script src="/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <link
@@ -40,6 +42,8 @@
 <script src="/adminlte/dist/js/pages/dashboard.js"></script>
 <!-- Select2 -->
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Ekko Lightbox -->
+<script src="/adminlte/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -56,6 +60,12 @@
 <!-- Page specific script -->
 <script>
   $(function () {
+    $(document).on("click", '[data-toggle="lightbox"]', function (event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true,
+      });
+    });
     $("#reservation").daterangepicker({
       opens: "left",
       showDropdowns: true,
@@ -64,13 +74,20 @@
         format: "DD/MM/YYYY",
       },
     });
-    // $("#reservation").val("Masukan Periode Jabatan");
     $("#example1")
       .DataTable({
         responsive: true,
         lengthChange: false,
         autoWidth: false,
-        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        ordering: false,
+        buttons: [
+          {
+            extend: "excel",
+            exportOptions: {
+              columns: ":not(:last-child)",
+            },
+          },
+        ],
       })
       .buttons()
       .container()
@@ -79,32 +96,26 @@
       paging: true,
       lengthChange: false,
       searching: true,
-      ordering: true,
+      ordering: false,
       info: true,
       autoWidth: false,
       responsive: true,
     });
 
-    $("input[data-bootstrap-switch]").each(function () {
-      $(this).bootstrapSwitch("state", $(this).prop("checked"));
-    });
-    //Date picker
-    $("#reservationdate").datetimepicker({
-      format: "DD/MM/YYYY",
-    });
-    $("#reservationdate2").datetimepicker({
-      format: "DD/MM/YYYY",
-    });
-
     //Date and time picker
     $("#reservationdatetime").datetimepicker({
+      format: "DD/MM/YYYY HH:mm:ss",
       icons: { time: "far fa-clock" },
     });
     $("#reservationdatetime2").datetimepicker({
+      format: "DD/MM/YYYY HH:mm:ss",
       icons: { time: "far fa-clock" },
     });
 
     //Initialize Select2 Elements
     $(".select2").select2();
+    $(function () {
+      bsCustomFileInput.init();
+    });
   });
 </script>

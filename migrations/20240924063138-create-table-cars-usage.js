@@ -38,7 +38,7 @@ module.exports = {
       },
       needs: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: false,
       },
       user_organization: {
         type: Sequelize.TEXT,

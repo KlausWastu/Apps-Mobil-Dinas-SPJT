@@ -6,12 +6,17 @@ var logger = require("morgan");
 const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const { isLogin } = require("./routes/middleware/auth");
 
 // var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 const signInRouter = require("./routes/signin");
+const usersRouter = require("./routes/users");
 const dashboardRouter = require("./routes/dashboard");
 const driverRouter = require("./routes/driver");
+const carRouter = require("./routes/car");
+const organizationRouter = require("./routes/organization");
+const carUsageRouter = require("./routes/carUsage");
+const logRouter = require("./routes/log");
 
 var app = express();
 
@@ -39,10 +44,73 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/admin-lte"))
 );
 
+app.get("/", (req, res) => {
+  res.redirect("/sign-in");
+});
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/sign-in");
+});
+app.get("/change-password", isLogin, async (req, res) => {
+  const { User } = require("./models");
+  const user = await User.findByPk(req.session.user.id);
+  try {
+    const alertMessage = req.flash("alertMessage");
+    const alertStatus = req.flash("alertStatus");
+    const alert = { message: alertMessage, status: alertStatus };
+    // console.log("USER: ", user);
+
+    res.render("pages/login/change_password", {
+      alert,
+      user,
+      title: "Ubah Password",
+    });
+  } catch (err) {
+    if (user.role === "superadmin") {
+      req.flash("alertMessage", `${err.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/");
+    } else {
+      req.flash("alertMessage", `${err.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/");
+    }
+  }
+});
+app.put("/change-password/:id", isLogin, async (req, res) => {
+  const { User } = require("./models");
+  const bcrypt = require("bcrypt");
+  try {
+    const { currPass, newPass } = req.body;
+    const user = await User.findByPk(req.session.user.id);
+    const hashpass = await bcrypt.hash(newPass, 12);
+    const checkPass = await bcrypt.compare(currPass, user.password);
+    if (!checkPass) {
+      req.flash("alertMessage", "Gagal update password");
+      req.flash("alertStatus", "danger");
+      res.redirect("/change-password");
+    }
+    await user.update({
+      password: hashpass,
+    });
+    req.flash("alertMessage", `Berhasil update password`);
+    req.flash("alertStatus", "success");
+    req.session.destroy();
+    res.redirect("/");
+  } catch (err) {
+    req.flash("alertMessage", `${err.message}`);
+    req.flash("alertStatus", "danger");
+    res.redirect("/");
+  }
+});
 app.use("/sign-in", signInRouter);
 app.use("/users", usersRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/drivers", driverRouter);
+app.use("/cars", carRouter);
+app.use("/organizations", organizationRouter);
+app.use("/cars-usage", carUsageRouter);
+app.use("/logs", logRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

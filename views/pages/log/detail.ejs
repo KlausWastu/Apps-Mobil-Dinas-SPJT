@@ -51,13 +51,7 @@
                 <div class="col-12">
                   <h5>Driver</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <% drivers.forEach(driver => { %> <% if(driver.id.toString()
                     === dataCurrent.driver_id ) {%>
                     <p><%= driver.name %></p>
@@ -100,6 +94,18 @@
                     <!-- /.user-block -->
                     <p><%= dataCurrent.date_back %></p>
                   </div>
+                  <h5>Keperluan</h5>
+                  <div class="post">
+                    <div class="user-block">
+                      <!-- <img
+                              class="img-circle img-bordered-sm"
+                              src="../../dist/img/user1-128x128.jpg"
+                              alt="user image"
+                            /> -->
+                    </div>
+                    <!-- /.user-block -->
+                    <p><%= dataCurrent.needs %></p>
+                  </div>
                   <h5>Lokasi yang Dituju</h5>
                   <div class="post">
                     <div class="user-block">
@@ -114,28 +120,19 @@
                   </div>
                   <h5>Penumpang</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataCurrent.passenger %></p>
                   </div>
                   <h5>Organisasi</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
-                    <% if (userOrganizationParsedCurrent.length < 2) { %> <%
-                    organizations.forEach(organisasi => { %> <% if
+                    <% if (userOrganizationParsedCurrent === null ||
+                    !userOrganizationParsedCurrent) {%>
+                    <p>Kosong</p>
+                    <% } else if (userOrganizationParsedCurrent.length < 2) { %>
+                    <% organizations.forEach(organisasi => { %> <% if
                     (organisasi.id.toString() ===
                     userOrganizationParsedCurrent[0].toString()) { %>
                     <p><%= organisasi.name %></p>
@@ -151,38 +148,19 @@
                   </div>
                   <h5>KM Terakhir</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataCurrent.km_last %></p>
                   </div>
                   <h5>KM Trip</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataCurrent.km_last %></p>
                   </div>
-                  <% if(role === "superadmin") {%>
                   <h5>Tarif Tol</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataCurrent.tol_rates === null) {%>
                     <p>Kosong</p>
@@ -192,13 +170,7 @@
                   </div>
                   <h5>Tarif Parkir</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataCurrent.parking_rates === null) {%>
                     <p>Kosong</p>
@@ -208,13 +180,7 @@
                   </div>
                   <h5>Tarif Bensin</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataCurrent.fuel_rates === null) {%>
                     <p>Kosong</p>
@@ -222,21 +188,43 @@
                     <p><%= dataCurrent.fuel_rates %></p>
                     <% } %>
                   </div>
-                  <% } %>
                   <h5>Keterangan</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                              class="img-circle img-bordered-sm"
-                              src="../../dist/img/user1-128x128.jpg"
-                              alt="user image"
-                            /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataCurrent.note === null) {%>
                     <p>Kosong</p>
                     <% } else { %>
                     <p><%= dataCurrent.note %></p>
+                    <% } %>
+                  </div>
+                  <h5>Upload Files</h5>
+                  <div class="post">
+                    <div class="user-block"></div>
+                    <!-- /.user-block -->
+                    <% if(dataCurrent.photos === null) {%>
+                    <p>Kosong</p>
+                    <% } else { %>
+                    <div class="row">
+                      <% for (let i = 0; i < photosParsedCurrent.length; i++) {
+                      %>
+                      <div class="col-sm-2">
+                        <a
+                          href="/images/upload/<%= photosParsedCurrent[i] %>"
+                          data-toggle="lightbox"
+                          data-title="<%= photosParsedCurrent[i] %>"
+                          data-gallery="gallery"
+                        >
+                          <img
+                            src="/images/upload/<%= photosParsedCurrent[i] %>"
+                            class="img-fluid mb-2"
+                            alt="/images/upload/<%= photosParsedCurrent[i] %>"
+                          />
+                          <!-- <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/> -->
+                        </a>
+                      </div>
+                      <% } %>
+                    </div>
                     <% } %>
                   </div>
                 </div>
@@ -308,13 +296,7 @@
                 <div class="col-12">
                   <h5>Driver</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <% drivers.forEach(driver => { %> <% if(driver.id.toString()
                     === dataPrev.driver_id.toString() ) {%>
                     <p><%= driver.name %></p>
@@ -322,13 +304,7 @@
                   </div>
                   <h5>Mobil</h5>
                   <div class="post clearfix">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user7-128x128.jpg"
-                                    alt="User Image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <% cars.forEach(car => { %> <% if(car.id.toString() ===
                     dataPrev.car_id.toString() ) {%>
                     <p><%= car.number_plate %></p>
@@ -336,62 +312,41 @@
                   </div>
                   <h5>Tanggal Berangkat</h5>
                   <div class="post clearfix">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user7-128x128.jpg"
-                                    alt="User Image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <p><%= dataPrev.date_departure %></p>
                   </div>
                   <h5>Tangal Kembali</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataPrev.date_back %></p>
                   </div>
+                  <h5>Keperluan</h5>
+                  <div class="post">
+                    <div class="user-block"></div>
+                    <!-- /.user-block -->
+                    <p><%= dataPrev.needs %></p>
+                  </div>
                   <h5>Lokasi yang Dituju</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataPrev.location_destination %></p>
                   </div>
                   <h5>Penumpang</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataPrev.passenger %></p>
                   </div>
                   <h5>Organisasi</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
-                    <% if (userOrganizationParsedPrev.length < 2) { %> <%
+                    <% if (userOrganizationParsedPrev === null ||
+                    !userOrganizationParsedPrev) {%>
+                    <p>Kosong</p>
+                    <% } else if (userOrganizationParsedPrev.length < 2) { %> <%
                     organizations.forEach(organisasi => { %> <% if
                     (organisasi.id.toString() ===
                     userOrganizationParsedPrev[0].toString()) { %>
@@ -408,38 +363,20 @@
                   </div>
                   <h5>KM Terakhir</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataPrev.km_last %></p>
                   </div>
                   <h5>KM Trip</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <p><%= dataPrev.km_last %></p>
                   </div>
                   <% if(role === "superadmin") {%>
                   <h5>Tarif Tol</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataPrev.tol_rates === null) {%>
                     <p>Kosong</p>
@@ -449,13 +386,7 @@
                   </div>
                   <h5>Tarif Parkir</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataPrev.parking_rates === null) {%>
                     <p>Kosong</p>
@@ -465,13 +396,7 @@
                   </div>
                   <h5>Tarif Bensin</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataPrev.fuel_rates === null) {%>
                     <p>Kosong</p>
@@ -482,18 +407,40 @@
                   <% } %>
                   <h5>Keterangan</h5>
                   <div class="post">
-                    <div class="user-block">
-                      <!-- <img
-                                    class="img-circle img-bordered-sm"
-                                    src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image"
-                                  /> -->
-                    </div>
+                    <div class="user-block"></div>
                     <!-- /.user-block -->
                     <% if(dataPrev.note === null) {%>
                     <p>Kosong</p>
                     <% } else { %>
                     <p><%= dataPrev.note %></p>
+                    <% } %>
+                  </div>
+                  <h5>Upload Files</h5>
+                  <div class="post">
+                    <div class="user-block"></div>
+                    <!-- /.user-block -->
+                    <% if(dataPrev.photos === null) {%>
+                    <p>Kosong</p>
+                    <% } else { %>
+                    <div class="row">
+                      <% for (let i = 0; i < photosParsedPrev.length; i++) { %>
+                      <div class="col-sm-2">
+                        <a
+                          href="/images/upload/<%= photosParsedPrev[i] %>"
+                          data-toggle="lightbox"
+                          data-title="<%= photosParsedPrev[i] %>"
+                          data-gallery="gallery"
+                        >
+                          <img
+                            src="/images/upload/<%= photosParsedPrev[i] %>"
+                            class="img-fluid mb-2"
+                            alt="/images/upload/<%= photosParsedPrev[i] %>"
+                          />
+                          <!-- <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/> -->
+                        </a>
+                      </div>
+                      <% } %>
+                    </div>
                     <% } %>
                   </div>
                 </div>

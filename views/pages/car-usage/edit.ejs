@@ -36,6 +36,7 @@
             <form
               action="/cars-usage/edit/<%= carsUsage.id %>?_method=PUT"
               method="POST"
+              enctype="multipart/form-data"
             >
               <div class="card-body">
                 <div class="row">
@@ -155,6 +156,23 @@
                         id="location_destination"
                         placeholder="Masukan lokasi yang dituju"
                         value="<%= carsUsage.location_destination %>"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="needs">Keperluan</label>
+                      <input
+                        type="text"
+                        name="needs"
+                        class="form-control"
+                        id="needs"
+                        placeholder="Masukan keperluan"
+                        value="<%= carsUsage.needs %>"
+                        required
                       />
                     </div>
                   </div>
@@ -301,7 +319,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-12 col-md-12">
+                  <div class="col-12 col-md-6">
                     <div class="form-group">
                       <label for="name">Keterangan</label>
                       <% if(carsUsage.note === null) {%>
@@ -320,6 +338,39 @@
                         id="note"
                         value="<%= carsUsage.note %>"
                       />
+                      <% } %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="photos">Unggah Files</label>
+                      <div class="custom-file">
+                        <input
+                          type="file"
+                          class="custom-file-input"
+                          id="customFile"
+                          name="files"
+                          accept=".jpg, .jpeg, .png"
+                          multiple
+                        />
+                        <label class="custom-file-label" for="customFile"
+                          >Pilih file</label
+                        >
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <% if (carsUsage.photos && carsUsage.photos.length > 0) { %>
+                        <label for="existingPhotos">Existing Photos:</label>
+                        <div class="row">
+                          <% for (let i = 0; i < photosParsed.length; i++) { %>
+                            <div class="col-sm-2">
+                              <a href="/images/upload/<%= photosParsed[i] %>" data-toggle="lightbox" data-title="<%= photosParsed[i] %>" data-gallery="gallery">
+                                <img src="/images/upload/<%= photosParsed[i] %>" class="img-fluid mb-2" alt="/images/upload/<%= photosParsed[i] %>"/>
+                                <!-- <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/> -->
+                              </a>
+                            </div>
+                          <% } %>
+                        </div>
                       <% } %>
                     </div>
                   </div>

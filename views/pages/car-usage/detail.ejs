@@ -59,10 +59,7 @@
                       alt="user image"
                     /> -->
                   </div>
-                  <% drivers.forEach(driver => { %> <% if(driver.id ===
-                  detailCarUsage.driver_id ) {%>
-                  <p><%= driver.name %></p>
-                  <% } %> <% }) %>
+                  <p><%= detailCarUsage.driver.name %></p>
                 </div>
                 <h5>Mobil</h5>
                 <div class="post clearfix">
@@ -73,10 +70,7 @@
                       alt="User Image"
                     /> -->
                   </div>
-                  <% cars.forEach(car => { %> <% if(car.id ===
-                  detailCarUsage.car_id ) {%>
-                  <p><%= car.number_plate %></p>
-                  <% } %> <% }) %>
+                  <p><%= detailCarUsage.car.number_plate %></p>
                 </div>
                 <h5>Tanggal Berangkat</h5>
                 <div class="post clearfix">
@@ -100,6 +94,18 @@
                   </div>
                   <!-- /.user-block -->
                   <p><%= detailCarUsage.date_back %></p>
+                </div>
+                <h5>Keperluan</h5>
+                <div class="post">
+                  <div class="user-block">
+                    <!-- <img
+                      class="img-circle img-bordered-sm"
+                      src="../../dist/img/user1-128x128.jpg"
+                      alt="user image"
+                    /> -->
+                  </div>
+                  <!-- /.user-block -->
+                  <p><%= detailCarUsage.needs %></p>
                 </div>
                 <h5>Lokasi yang Dituju</h5>
                 <div class="post">
@@ -136,7 +142,9 @@
                     /> -->
                   </div>
                   <!-- /.user-block -->
-                  <% if (userOrganizationParsed.length < 2) { %> <%
+                  <% if (userOrganizationParsed === null) {%>
+                  <p>Kosong</p>
+                  <% } else if (userOrganizationParsed.length < 2) { %> <%
                   organizations.forEach(organisasi => { %> <% if
                   (organisasi.id.toString() ===
                   userOrganizationParsed[0].toString()) { %>
@@ -240,6 +248,40 @@
                   <p>Kosong</p>
                   <% } else { %>
                   <p><%= detailCarUsage.note %></p>
+                  <% } %>
+                </div>
+                <h5>Upload Files</h5>
+                <div class="post">
+                  <div class="user-block">
+                    <!-- <img
+                      class="img-circle img-bordered-sm"
+                      src="../../dist/img/user1-128x128.jpg"
+                      alt="user image"
+                    /> -->
+                  </div>
+                  <!-- /.user-block -->
+                  <% if(detailCarUsage.photos === null) {%>
+                  <p>Kosong</p>
+                  <% } else { %>
+                  <div class="row">
+                    <% for (let i = 0; i < photosParsed.length; i++) { %>
+                    <div class="col-sm-2">
+                      <a
+                        href="/images/upload/<%= photosParsed[i] %>"
+                        data-toggle="lightbox"
+                        data-title="<%= photosParsed[i] %>"
+                        data-gallery="gallery"
+                      >
+                        <img
+                          src="/images/upload/<%= photosParsed[i] %>"
+                          class="img-fluid mb-2"
+                          alt="/images/upload/<%= photosParsed[i] %>"
+                        />
+                        <!-- <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/> -->
+                      </a>
+                    </div>
+                    <% } %>
+                  </div>
                   <% } %>
                 </div>
               </div>

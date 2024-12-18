@@ -33,7 +33,11 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/cars-usage/create" method="POST">
+            <form
+              action="/cars-usage/create"
+              method="POST"
+              enctype="multipart/form-data"
+            >
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 col-md-6">
@@ -80,7 +84,6 @@
                     <div class="form-group">
                       <label style="color: red">*</label>
                       <label for="date_departure">Tanggal Berangkat</label>
-                      <!-- Date and time -->
                       <div
                         class="input-group date"
                         id="reservationdatetime"
@@ -91,6 +94,7 @@
                           class="form-control datetimepicker-input"
                           data-target="#reservationdatetime"
                           name="date_departure"
+                          placeholder="Tanggal berangkat"
                         />
                         <div
                           class="input-group-append"
@@ -106,6 +110,7 @@
                   </div>
                   <div class="col-12 col-md-3">
                     <div class="form-group">
+                      <label style="color: red">*</label>
                       <label for="date_back">Tanggal Pulang</label>
                       <div
                         class="input-group date"
@@ -117,6 +122,7 @@
                           class="form-control datetimepicker-input"
                           data-target="#reservationdatetime2"
                           name="date_back"
+                          placeholder="Tanggal kembali"
                         />
                         <div
                           class="input-group-append"
@@ -132,6 +138,7 @@
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group">
+                      <label style="color: red">*</label>
                       <label for="location_destination"
                         >Lokasi yang Dituju</label
                       >
@@ -146,6 +153,23 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="needs">Keperluan</label>
+                      <input
+                        type="text"
+                        name="needs"
+                        class="form-control"
+                        id="needs"
+                        placeholder="Masukan keperluan"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <% if(role === "superadmin") {%>
                 <div class="row">
                   <div class="col-12 col-md-6">
                     <div class="form-group">
@@ -181,6 +205,24 @@
                     </div>
                   </div>
                 </div>
+                <% } else {%>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <label style="color: red">*</label>
+                      <label for="passenger">Nama-Nama Penumpang</label>
+                      <input
+                        type="text"
+                        name="passenger"
+                        class="form-control"
+                        id="passenger"
+                        placeholder="Masukan nama penumpang"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <% } %>
                 <div class="row">
                   <div class="col-12 col-md-6">
                     <div class="form-group">
@@ -211,6 +253,7 @@
                     </div>
                   </div>
                 </div>
+                <% if(role === "superadmin") {%>
                 <div class="row">
                   <div class="col-12 col-md-4">
                     <div class="form-group">
@@ -249,8 +292,9 @@
                     </div>
                   </div>
                 </div>
+                <% } %>
                 <div class="row">
-                  <div class="col-12 col-md-12">
+                  <div class="col-12 col-md-6">
                     <div class="form-group">
                       <label for="name">Keterangan</label>
                       <input
@@ -262,6 +306,25 @@
                       />
                     </div>
                   </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="photos">Upload Files</label>
+                      <div class="custom-file">
+                        <input
+                          type="file"
+                          class="custom-file-input"
+                          id="customFile"
+                          name="files"
+                          accept=".jpg, .jpeg, .png"
+                          multiple
+                        />
+                        <label class="custom-file-label" for="customFile"
+                          >Choose file</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <label for="customFile">Custom File</label> -->
                 </div>
               </div>
               <div class="card-footer">

@@ -1,40 +1,57 @@
-<div class="card-body">
-  <table id="example2" class="table table-bordered table-hover text-center">
+<div class="table-responsive">
+  <table id="example1" class="table table-bordered table-hover text-center">
     <thead>
       <tr>
         <th>No.</th>
-        <th>Driver</th>
-        <th>Mobil Operasional</th>
-        <th>Tanggal & Waktu Berangkat</th>
-        <th>Tanggal & Waktu Kembali</th>
-        <th>Lokasi yang Dituju</th>
+        <th>Driver / Mobil Operasional</th>
+        <th>Tanggal & Waktu Berangkat - Kembali</th>
+        <th>KM Terakhir / Trip</th>
+        <th>Keperluan / Lokasi yang Dituju</th>
+        <th>Penumpang / Organisasi</th>
+        <th hidden>Tarif Tol / Tarif Bensin / Tarif Parkir</th>
+        <th hidden>Keterangan</th>
+        <th hidden>Foto</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <% for(let i=0; i < carsUsage.length; i++) {%>
+      <% for (let i = 0; i < carsUsage.length; i++) { let usage = carsUsage[i]
+      %>
       <tr>
-        <td><%= i+1 %></td>
-        <td><%= carsUsage[i].driver.name %></td>
-        <td><%= carsUsage[i].car.number_plate %></td>
-        <td><%= carsUsage[i].date_departure %></td>
-        <td><%= carsUsage[i].date_back %></td>
-        <td><%= carsUsage[i].location_destination %></td>
-        <td class="d-flex justify-content-center">
+        <td><%= usage.id %></td>
+        <td><%= usage.driver.name %> / <%= usage.car.number_plate %></td>
+        <td><%= usage.date_departure %> - <%= usage.date_back %></td>
+        <td><%= usage.km_last %> / <%= usage.km_trip %></td>
+        <td><%= usage.needs %> / <%= usage.location_destination %></td>
+        <% if(usage.organizationsNames === null) {%>
+        <td>
+          <%= usage.passenger %> /
+          <span style="opacity: 0.5">Kosong</span>
+        </td>
+        <% } else {%>
+        <td><%= usage.passenger %> / <%= usage.organizationsNames %></td>
+        <% } %>
+        <td hidden>
+          <%= usage.tol_rates %> / <%= usage.fuel_rates %> / <%=
+          usage.parking_rates %>
+        </td>
+        <td hidden><%= usage.note %></td>
+        <td hidden><%= usage.photos %></td>
+        <td>
           <a
-            href="/cars-usage/detail/<%= carsUsage[i].id %>"
+            href="/cars-usage/detail/<%= usage.id %>"
             class="btn btn-primary btn-sm mr-2"
           >
             <i class="fas fa-info mr-2"> </i>Detail
           </a>
           <a
-            href="/cars-usage/edit/<%= carsUsage[i].id %>"
+            href="/cars-usage/edit/<%= usage.id %>"
             class="btn btn-warning btn-sm mr-2"
           >
             <i class="fas fa-pencil-alt mr-2"> </i>Edit
           </a>
           <form
-            action="/cars-usage/delete/<%= carsUsage[i].id %>?_method=DELETE"
+            action="/cars-usage/delete/<%= usage.id %>?_method=DELETE"
             style="display: inline-block"
             method="POST"
           >

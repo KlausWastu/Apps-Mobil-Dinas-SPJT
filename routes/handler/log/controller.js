@@ -19,6 +19,7 @@ module.exports = {
           },
         ],
         where: { deleted_at: null },
+        order: [["date", "DESC"]],
       };
 
       const formatLogs = await Log.findAll(sqlOptions);
@@ -47,18 +48,18 @@ module.exports = {
     const formatDate = (date) => moment(date).format("DD/MM/YYYY HH:mm:ss");
 
     // Membuat fungsi untuk pasring organisasi
-    const parseUserOrganization = (organization) => {
-      let userOrganizationParsed = null;
+    const parseData = (data) => {
+      let parsingData = null;
       try {
-        userOrganizationParsed = JSON.parse(organization);
-        if (typeof userOrganizationParsed === "number") {
-          userOrganizationParsed = [userOrganizationParsed];
+        parsingData = JSON.parse(data);
+        if (typeof parsingData === "number") {
+          parsingData = [parsingData];
         }
       } catch (e) {
-        userOrganizationParsed = organization;
+        parsingData = data;
       }
 
-      return userOrganizationParsed;
+      return parsingData;
     };
 
     // Membuat fungsi untuk data current dan prev
@@ -96,20 +97,32 @@ module.exports = {
       const dataPrev = dataprev ? formatData(dataprev) : null;
 
       //   Parse user_organization
-      const userOrganizationParsedCurrent = parseUserOrganization(
+      const userOrganizationParsedCurrent = parseData(
         dataCurrent.user_organization
       );
+      console.log(dataCurrent);
 
       const userOrganizationParsedPrev = dataPrev
-        ? parseUserOrganization(dataPrev.user_organization)
+        ? parseData(dataPrev.user_organization)
         : null;
 
+      // Parse Photos
+      const photosParsedCurrent = dataCurrent
+        ? parseData(dataCurrent.photos)
+        : null;
+
+      const photosParsedPrev = dataPrev ? parseData(dataPrev.photos) : null;
+
+      console.log("Data Foto Sekarang: ", photosParsedCurrent);
+      console.log("Data Foto Lama: ", photosParsedPrev);
       res.render("pages/log/detail", {
         title: judul,
         log,
         cars,
         drivers,
         organizations,
+        photosParsedCurrent,
+        photosParsedPrev,
         dataCurrent,
         dataPrev,
         userOrganizationParsedCurrent,
@@ -118,6 +131,8 @@ module.exports = {
         role: req.session.user.role,
       });
     } catch (err) {
+      console.log(err);
+
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/logs");

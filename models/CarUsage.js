@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       needs: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: false,
       },
       location_destination: {
         type: DataTypes.STRING,
